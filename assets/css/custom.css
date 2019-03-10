@@ -1,0 +1,13 @@
+#anim{
+	width: 100%;
+	background: #183026;
+	position: absolute;
+	height: 100vh;
+}
+#header header{
+	 background: rgba(0, 0, 0, 0.4);
+}
+.project-img{	
+	max-height: 10em;
+	object-fit: contain;
+}
