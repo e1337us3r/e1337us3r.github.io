@@ -38,7 +38,7 @@
 		usePopupCaption: true,
 		popupLoaderText: 'Loading...',
 		windowMargin: 10,
-		usePopupNav: true,
+		usePopupNav: false,
 		popupWidth: '20em'
 	});
 
