@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>BPT STATS</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .col-1 {width: 8.33%;}
+        .col-2 {width: 16.66%;}
+        .col-3 {width: 25%;}
+        .col-4 {width: 33.33%;}
+        .col-5 {width: 41.66%;}
+        .col-6 {width: 50%;}
+        .col-7 {width: 58.33%;}
+        .col-8 {width: 66.66%;}
+        .col-9 {width: 75%;}
+        .col-10 {width: 83.33%;}
+        .col-11 {width: 91.66%;}
+        .col-12 {width: 100%;}
+
+        [class*="col-"] {
+            float: left;
+            padding: 15px;
+        }
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .img {
+            text-align: center;
+        }
+        .img:active {
+            color: greenyellow;
+        }
+        #icons {
+            margin: 0 auto;
+        }
+
+        header{
+            padding: 15px;
+            margin: 0 auto;
+            text-align: center;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        #myChart {
+            height: 100vh;
+            width: 100%;
+        }
+
+        #icons {
+            margin: 50vh auto;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/637aed2aca.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>Katılımcı İstatistikleri</header>
+<canvas id="myChart"></canvas>
+<h3 id="counter">Toplam Oy: 0</h3>
+<section id="icons">
+    <div class="row">
+        <div id="facebook" class="col-3 img fab fa-facebook-square fa-6x"></div>
+        <div id="instagram" class="col-3 img fab fa-instagram  fa-6x"></div>
+        <div id="twitter" class="col-3 img fab fa-twitter-square  fa-6x"></div>
+        <div id="whatsapp" class="col-3 img fab fa-whatsapp-square  fa-6x"></div>
+    </div>
+
+    <div class="row">
+        <div id="email" class="col-3 img fas fa-envelope fa-6x"></div>
+        <div id="poster" class="col-3 img fas fa-scroll fa-6x"></div>
+        <div id="people" class="col-3 img fas fa-users fa-6x"></div>
+        <div id="other" class="col-3 img fas fa-external-link-alt fa-6x"></div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const labels = ['Facebook', 'Instagram', 'Twitter', 'Whatsapp', 'BAIS', 'Poster', 'People', "Other"];
+    const  myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                label: '# of Votes',
+                data: [0,0,0,0,0,0,0,0],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        precision: 0,
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    const sources = [0,0,0,0,0,0,0,0];
+    let counter = 0;
+    const counterElement = document.querySelector("#counter");
+
+    document.querySelectorAll(".img").forEach((element,key,parent)=>{
+        element.addEventListener("click",(element,event)=>{
+            counter++;
+            counterElement.textContent = `Toplam oy: ${counter}`;
+            sources[key]++;
+            myChart.data.datasets[0].data = sources;
+            myChart.update();
+        });
+    });
+
+
+</script>
+</body>
+</html>
